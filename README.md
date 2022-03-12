@@ -17,29 +17,21 @@
 
 <h2>Usage</h2>
 <p>So basically you start by cloning the package in your terminal/cmd</p>
-` ` ` js
+
+``` bash
  git clone MihirBhave/sdhandler
-` ` `
+```
 <br>
 <p>Open your project and bring the package . Next , open your index.js (YOUR MAIN FILE) and import the package </p>
-<<<<<<< HEAD
 
-```js
-=======
 ``` js
->>>>>>> 22589a55bdcdbe679c1365dd19de04c0f5ac1d6c
     const sdhandler = require('./sdhandler')
-
 
 ```
 <br>
 <p> Now lets use the package !</p>
-<<<<<<< HEAD
 
-```js
-=======
 ``` js
->>>>>>> 22589a55bdcdbe679c1365dd19de04c0f5ac1d6c
 const sdhandler = require('./sdhandler')
 
 sdhandler.sdhandler({
