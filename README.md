@@ -19,7 +19,7 @@
 <p>So basically you start by cloning the package in your terminal/cmd</p>
 
 ``` bash
- git clone MihirBhave/sdhandler
+ git clone https://github.com/MihirBhave/sdhandler.git
 ```
 <br>
 <p>Open your project and bring the package . Next , open your index.js (YOUR MAIN FILE) and import the package </p>
