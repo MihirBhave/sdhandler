@@ -28,7 +28,7 @@ module.exports =async(client) => {
             if(client.buttons.has(interaction.customId)){
 
                 const button = client.buttons.get(interaction.customId)
-                button.run({interaction : interaction})
+                button.run({interaction : interaction , client : client})
             }
         }
     })

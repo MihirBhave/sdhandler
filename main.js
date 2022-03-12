@@ -4,12 +4,13 @@ const {Client} = require('discord.js')
 /**
  * @async
  */
-const sdhandler = async({client , testOnly , commandsDir  , token, eventsDir , prefix , guildID , buttonsDir , menusDir})=> {
+const sdhandler = async({client , testOnly , commandsDir  , token, eventsDir , prefix , guildID , buttonsDir })=> {
     let commandsPath = ''
     let eventsPath = ''
     let buttonsPath = ''
     let menusPath = ''
 
+    if(!prefix) prefix = "!"
     if(!client) return console.log('Client object not provided.')
     if(commandsDir){
         commandsPath = path.join(__dirname , `../../${commandsDir}`)
@@ -35,7 +36,7 @@ const sdhandler = async({client , testOnly , commandsDir  , token, eventsDir , p
     if(testOnly){
         if(!guildID) return console.log('Please specify the Guild Id.')
     }
-    console.log(eventsPath)
+    
     // Defining all the Discord Collections.
     client.slashcommands = new Discord.Collection()
     client.commands = new Discord.Collection()
