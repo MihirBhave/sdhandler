@@ -106,3 +106,8 @@ sdhandler.sdhandler({
         }
     }
 ```
+
+# TO-DO
+-> Publish the package on npm.
+-> Add Documentation.
+-> Create a Support Server
