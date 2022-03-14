@@ -10,6 +10,14 @@
     <a href="https://github.com/Mihirbhave/sdhandler/blob/main/LICENSE"><img src="https://img.shields.io/github/license/MihirBhave/sdhandler" alt="LICENSE Badge"/></a>
 </div>
 <br>
+<h2>Support</h2>
+<p> You can support this package by : </p>
+<br>
+<p>  - > Starring</p>
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/R5R37LWXA)
+<br>
+
+<p>Also join our <a href="https://discord.com/invite/536Ex6WCMG">Support Server</a> if you need help or any issue arises.</p>
 <h2>Introduction</h2>
 <p><i>This package was developed to make development of Discord bots using Discord.js package more easy. All the commands ( legacy and slash commands) , Events ( guild and client ) and Buttons are handled by this package. Thus no need to make a event/command handler !</i></p>
 
@@ -22,4 +30,5 @@
  npm i sdhandler
 ```
 <br>
+
 
