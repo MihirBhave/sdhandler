@@ -14,7 +14,9 @@
 <p> You can support this package by : </p>
 <br>
 <p>  - > Starring</p>
+
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/R5R37LWXA)
+
 <br>
 
 <p>Also join our <a href="https://discord.com/invite/536Ex6WCMG">Support Server</a> if you need help or any issue arises.</p>
