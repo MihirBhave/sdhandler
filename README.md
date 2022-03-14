@@ -33,4 +33,4 @@
 ```
 <br>
 
-<p>Check the <a href="https://sudo-dragon.gitbook.io/sdhandler-docs/">guide</a>out for information.</p>
+<p>Check the <a href="https://sudo-dragon.gitbook.io/sdhandler-docs/">guide</a> out for information.</p>
