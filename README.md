@@ -18,6 +18,7 @@
 
 
 # Introduction
+
 <em> This package was developed to make development of Discord bots using the [discord.js](https://discord.js.org/#/) package easier. Legacy and slash commands, guild and client events, and buttons are handled by this package. No need to make a event / command handler ! </em>
 
 
@@ -33,6 +34,7 @@
 <p>Join our <a href="https://discord.com/invite/536Ex6WCMG">support server</a> if you need help or any issue arises.</p>
 
 ## Support
+
 <h3> Contribute </h3>
     <ul>
         <li> Leave a star 🌟 </li>
@@ -41,5 +43,6 @@
     </ul> 
   
 ## Support Me :
+
 <a href = "https://ko-fi.com/R5R37LWXA" ><img src = "https://ko-fi.com/img/githubbutton_sm.svg" alt = KoFi></a>
 <br></br>
