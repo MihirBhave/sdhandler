@@ -8,8 +8,9 @@ const Discord = require('discord.js')
  */
 module.exports = (client ) => {
     client.on('messageCreate' , (message) => {
-    const prefix = client.prefix
-    if(!message.content.startsWith(prefix) || message.author.bot) return;
+    const prefixes = client.prefix
+    const prefix = prefixes.filter(p => message.content.startsWith(p))
+    if(!prefix || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).split(/ +/);
     const cmd = args.shift().toLowerCase();

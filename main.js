@@ -10,7 +10,7 @@ const sdhandler = async({client , testOnly , commandsDir  , token, eventsDir , p
     let buttonsPath = ''
     let menusPath = ''
 
-    if(!prefix) prefix = "!"
+    if(!prefix) prefix = ["!"]
     if(!client) return console.log('Client object not provided.')
     if(commandsDir){
         commandsPath = path.join(__dirname , `../../${commandsDir}`)

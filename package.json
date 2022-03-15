@@ -1,15 +1,24 @@
 {
   "name": "sdhandler",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.2",
+  "description": "This is a package aimed at making development of Discord Bots Easier !",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "run": "ndoemon main.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "keywords": [
+    "NodeJS",
+    "eventhandler",
+    "commandhandler",
+    "discord"
+  ],
+  "author": "Mihir Bhave",
   "license": "MIT",
   "dependencies": {
     "discord.js": "^13.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MihirBhave/sdhandler.git"
   }
 }
