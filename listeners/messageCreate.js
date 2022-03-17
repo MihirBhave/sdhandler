@@ -1,5 +1,6 @@
 const {Client , Message}  = require('discord.js')
 const Discord = require('discord.js')
+const { permissions } = require('../../../commands/ping')
 /**
  * 
  * @param {Client} client 
@@ -20,8 +21,13 @@ module.exports = (client ) => {
     if(!command) return ;
 
     try{
-        const count =  command.permissions.filter(perm => !message.member.permissions.has(perm))
-        if(count.length == 0  || message.guild.OwnerId === message.member.id){
+        let perms = [Discord.Permissions.FLAGS.SEND_MESSAGES]
+        let count 
+        if(!command.permissions)  count =  message.member.permissions.has(perms)
+        else{
+            count =  command.permissions.filter(perm => !message.member.permissions.has(perm)) 
+        }
+        if(count.length == 0  || message.guild.OwnerId === message.member.id || count == true ){
             command.execute({client : client , message : message , args : args});
         }
         else{
