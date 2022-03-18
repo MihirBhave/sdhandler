@@ -16,7 +16,7 @@ module.exports =async(client) => {
                 const arr = command.permissions.filter(perm => !interaction.member.permissions.has(perm))
 
                 if(arr.length == 0 || interaction.guild.ownerId === interaction.member.id){
-                    command.execute({interaction : interaction , options : interaction.options})
+                    command.execute({interaction : interaction , options : interaction.options , client : client})
                 }
                 else{
                     interaction.reply({content : 'You do not have the permission to run this command.' , ephemeral : true})

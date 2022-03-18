@@ -1,6 +1,6 @@
 const {Client , Message}  = require('discord.js')
 const Discord = require('discord.js')
-const { permissions } = require('../../../commands/ping')
+
 /**
  * 
  * @param {Client} client 
