@@ -28,7 +28,7 @@ module.exports = (client ) => {
             count =  command.permissions.filter(perm => !message.member.permissions.has(perm)) 
         }
         if(count.length == 0  || message.guild.OwnerId === message.member.id || count == true ){
-            command.execute({client : client , message : message , args : args , prefix : prefix});
+            command.execute({client : client , message : message , args : args , prefix : prefix , channel : message.channel});
         }
         else{
             message.reply({content : "You don't have the appropriate permissions needed."})
