@@ -9,6 +9,7 @@ const Discord = require('discord.js')
 module.exports = (client) =>{
     client.on('ready' , () => {
         let arrayofCommands = new Array()
+        const commandsArray = []
         let commands
         console.log(`\nLogged in as ${client.user.tag} \n`) 
         console.log('*'.repeat(50))
@@ -38,15 +39,29 @@ module.exports = (client) =>{
             }
         }
         if(client.testOnly == true){
+            /*
             const guild = client.guilds.cache.get(client.guildID)
             if(!guild) return console.log(`Guild with ID '${client.guildID} not found.`)
             commands = guild.commands
+            */
+            // Support for multiple guilds.
+        
+            client.guildID.map(id => {
+                var guild = client.guilds.cache.get(id)
+                if(guild){
+                    commandsArray.push(guild.commands)
+                    console.log(guild.name)
+                }
+            })
         }
         else{
+            
             commands = client.application.commands
         }
         try{
-            commands.set(arrayofCommands)
+            //
+            commandsArray.map(command => command.set(arrayofCommands)) || commands.set(arrayofCommands)
+            //commands.set(arrayofCommands)
         }
         catch(err){
             console.log(err)

@@ -64,3 +64,4 @@ const sdhandler = async({client , testOnly , commandsDir  , token, eventsDir , p
 }
 
 module.exports.sdhandler = sdhandler;
+
