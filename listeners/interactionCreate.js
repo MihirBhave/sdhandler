@@ -9,7 +9,7 @@ const {Client , Interaction} = require('discord.js')
 module.exports =async(client) => {
     client.on('interactionCreate' , async(interaction) => {
         
-        if(interaction.isCommand()){
+        if(interaction.isCommand() || interaction.isApplicationCommand()){
             if(client.slashcommands.has(interaction.commandName)){
                 
                 const command = client.slashcommands.get(interaction.commandName)
