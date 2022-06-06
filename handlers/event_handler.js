@@ -1,6 +1,11 @@
 const fs = require('fs')
 const path = require('path')
 
+
+/**
+ *  
+ */
+
 module.exports = async (client) => {
     console.log('EVENTS \n')
     if(!fs.existsSync(client.eventsPath)) return ;

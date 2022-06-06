@@ -36,6 +36,7 @@ module.exports = (client) =>{
     
                 if(command.name){
                     client.commands.set(command.name , command)
+                    console.log(`${command.name} : ✅`)
                     if(command.slash){
                         if(command.slash == true){
                             client.slashcommands.set(command.name , command)

@@ -1,16 +1,15 @@
 
-const {Client } = require('discord.js')
+const {Client , Permissions} = require('discord.js')
 const Discord = require('discord.js')
 /**
  * @async
  * @param {Client} client
+ * @param {Discord} Discord
  */
 
 module.exports = (client) =>{
     client.on('ready' , () => {
         let arrayofCommands = new Array()
-        const commandsArray = []
-        let commands
         console.log(`\nLogged in as ${client.user.tag} \n`) 
         console.log('*'.repeat(50))
 
@@ -18,7 +17,8 @@ module.exports = (client) =>{
 
         for (var command of client.slashcommands.entries()) {
             const data = command[1]
-            if(!data.type) data.type = Discord.Constants.ApplicationCommandTypes.CHAT_INPUT //return console.log(`Please specify the "type" for ${command[0]} slash command.`)
+            if(!data.type) data.type = Discord.Constants.ApplicationCommandTypes.CHAT_INPUT
+            if(data.permissions) data.permissions = [Permissions.FLAGS.SEND_MESSAGES]
 
             //Checking the type of the slash command.
             if(data.type == Discord.Constants.ApplicationCommandTypes.USER || data.type == Discord.Constants.ApplicationCommandTypes.MESSAGE || data.type == "MESSAGE" || data.type == "USER"){
@@ -38,35 +38,23 @@ module.exports = (client) =>{
                 })
             }
         }
-        if(client.testOnly == true){
-            /*
-            const guild = client.guilds.cache.get(client.guildID)
-            if(!guild) return console.log(`Guild with ID '${client.guildID} not found.`)
-            commands = guild.commands
-            */
-            // Support for multiple guilds.
-        
+        if(client.testOnly === true){
+            
+            console.log("[+] Deployed Guild Commands in : ")
             client.guildID.map(id => {
                 var guild = client.guilds.cache.get(id)
                 if(guild){
-                    commandsArray.push(guild.commands)
+                   guild.commands.set(arrayofCommands)
                     console.log(guild.name)
                 }
             })
         }
         else{
-            
-            commands = client.application.commands
+            console.log("[+] Deployed Global Commands !")
+             client.application.commands.set(arrayofCommands)
         }
-        try{
-            //
-            commandsArray.map(command => command.set(arrayofCommands)) || commands.set(arrayofCommands)
-            //commands.set(arrayofCommands)
-        }
-        catch(err){
-            console.log(err)
-        }
-        console.log(`Loaded ${client.commands.size} command(s).`)
+
+        console.log(`Loaded ${client.commands.size} legacy command(s) and ${client.slashcommands.size} slash commands !`)
               
     })
 }

@@ -3,6 +3,14 @@ const path = require('path')
 const {Client} = require('discord.js')
 /**
  * @async
+ * @param {Client} client
+ * @param {String} testOnly
+ * @param {String} commandsDir
+ * @param {String} token
+ * @param {String} eventsDir
+ * @param {Array} prefix
+ * @param {Array} guildID
+ * @param {String} buttonsDir
  */
 const sdhandler = async({client , testOnly , commandsDir  , token, eventsDir , prefix , guildID , buttonsDir })=> {
     let commandsPath = ''
