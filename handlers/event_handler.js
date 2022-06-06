@@ -15,7 +15,7 @@ module.exports = async (client) => {
         for(const file of event_files){
             const event = require(`${client.eventsPath}/${dirs}/${file}`)
             client.events.set(event.name , event)
-            client.on(event.name , (...args) => event.run(...args))
+            client.on(event.name , (...args) => event.run(client , ...args))
             console.log(`${event.name} : ✅`)
         }
       
@@ -27,7 +27,7 @@ module.exports = async (client) => {
             for(const file of event_files){
                 const event = require(`${client.eventsPath}/${file}`)
                 client.events.set(event.name , event)
-                client.on(event.name , (...args) => event.run(...args))
+                client.on(event.name , (...args) => event.run(client , ...args))
                 console.log(`${event.name} : ✅`)
             }
 
