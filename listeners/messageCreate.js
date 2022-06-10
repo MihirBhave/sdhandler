@@ -11,13 +11,12 @@ module.exports = (client ) => {
     client.on('messageCreate' , (message) => {
     const prefixes = client.prefix
     const prefix = prefixes.filter(p => message.content.startsWith(p))
-    if(!prefix || message.author.bot) return;
+ 
+    if(!prefix.length || message.author.bot) return;
 
-    const args = message.content.slice(prefix.length).split(/ +/);
+    const args = message.content.slice(prefix[0].length).split(/ +/);
     const cmd = args.shift().toLowerCase();
-
     const command = client.commands.get(cmd) || client.commands.find(a => a.aliases && a.aliases.includes(cmd));
-    
     if(!command) return ;
 
     try{
