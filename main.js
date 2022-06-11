@@ -45,10 +45,10 @@ const sdhandler = async({client , testOnly , commandsDir  , token, eventsDir , p
         if(!guildID) return console.log('Please specify the Guild Id.')
     }
     
-    // Defining all the Discord Collections.
-    client.slashcommands = new Discord.Collection()
-    client.commands = new Discord.Collection()
-    client.events = new Discord.Collection()
+    // Defining all the Discord Collections and Maps.
+    client.slashcommands = new Map()
+    client.commands = new Map()
+    client.events = new Map()
     client.testOnly = testOnly
     client.token = token
     client.commandsPath = commandsPath
@@ -57,8 +57,8 @@ const sdhandler = async({client , testOnly , commandsDir  , token, eventsDir , p
     client.guildID = guildID
     client.buttonsPath = buttonsPath
     client.menusPath = menusPath
-    client.buttons = new Discord.Collection()
-    client.menus = new Discord.Collection()
+    client.buttons = new Map()
+    client.menus = new Map()
 
     //Handlers
 
