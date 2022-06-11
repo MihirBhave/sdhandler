@@ -1,6 +1,5 @@
-const {Client} = require('discord.js')
-const fs = require('fs')
-const path = require('path')
+const { existsSync, readdirSync } = require('fs')
+const { join } = require('path')
 
 /**
  * 
@@ -9,10 +8,10 @@ const path = require('path')
 
 module.exports = async(client) => {
     //
-    if(fs.existsSync(`${client.menusPath}`)){
-        const menuFiles = fs.readdirSync(client.menusPath).filter(f => f.endsWith('.js'))
+    if(existsSync(`${client.menusPath}`)){
+        const menuFiles = readdirSync(client.menusPath).filter(f => f.endsWith('.js'))
         for(const file of menuFiles){
-            const menu = require(`${path.join(client.menusPath , file)}`)
+            const menu = require(`${join(client.menusPath , file)}`)
             client.menus.set(menu.name , menu)
         }
     }
