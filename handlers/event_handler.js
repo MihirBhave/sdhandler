@@ -1,5 +1,5 @@
-const fs = require('fs')
-const path = require('path')
+const { existsSync, readdirSync } = require('fs')
+const { join } = require('path')
 
 
 /**
@@ -8,9 +8,9 @@ const path = require('path')
 
 module.exports = (client) => {
     console.log('EVENTS \n')
-    if(!fs.existsSync(client.eventsPath)) return ;
+    if(!existsSync(client.eventsPath)) return ;
     const load_dir = (dirs) =>{
-        const event_files = fs.readdirSync(path.join(client.eventsPath , `${dirs}`)).filter(file => file.endsWith('.js'))
+        const event_files = readdirSync(join(client.eventsPath , `${dirs}`)).filter(file => file.endsWith('.js'))
 
         for(const file of event_files){
             const event = require(`${client.eventsPath}/${dirs}/${file}`)
@@ -22,7 +22,7 @@ module.exports = (client) => {
     }
     const load_events = (client) =>{
            
-            const event_files = fs.readdirSync(`${client.eventsPath}`).filter(file => file.endsWith('.js'))
+            const event_files = readdirSync(`${client.eventsPath}`).filter(file => file.endsWith('.js'))
     
             for(const file of event_files){
                 const event = require(`${client.eventsPath}/${file}`)
@@ -35,7 +35,7 @@ module.exports = (client) => {
     }
     const events = ['client' , 'guild']
 
-    if(fs.existsSync(path.join(client.eventsPath , 'client')) && fs.existsSync(path.join(client.eventsPath , 'guild'))){
+    if(existsSync(join(client.eventsPath , 'client')) && existsSync(join(client.eventsPath , 'guild'))){
 
         events.forEach(e => load_dir(e))
         console.log(`Loaded ${client.events.size} events. \n`)
