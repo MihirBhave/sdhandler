@@ -6,10 +6,10 @@ const path = require('path')
  *  
  */
 
-module.exports = async (client) => {
+module.exports = (client) => {
     console.log('EVENTS \n')
     if(!fs.existsSync(client.eventsPath)) return ;
-    const load_dir = async(dirs) =>{
+    const load_dir = (dirs) =>{
         const event_files = fs.readdirSync(path.join(client.eventsPath , `${dirs}`)).filter(file => file.endsWith('.js'))
 
         for(const file of event_files){
@@ -20,7 +20,7 @@ module.exports = async (client) => {
         }
       
     }
-    const load_events = async (client) =>{
+    const load_events = (client) =>{
            
             const event_files = fs.readdirSync(`${client.eventsPath}`).filter(file => file.endsWith('.js'))
     
