@@ -1,5 +1,4 @@
-const Discord = require('discord.js')
-const path = require('path')
+const { join } = require('path')
 const {Client} = require('discord.js')
 /**
  * @async
@@ -19,26 +18,26 @@ const sdhandler = async({client , testOnly , commandsDir  , token, eventsDir , p
     let menusPath = ''
 
     if(!prefix) prefix = ["!"]
-    if(!client) return console.log('Client object not provided.')
+    if(!client) return console.log('Client object was not provided.')
     if(commandsDir){
-        commandsPath = path.join(__dirname , `../../${commandsDir}`)
+        commandsPath = join(__dirname , `../../${commandsDRir}`)
     }
     else {
-        commandsPath = path.join(__dirname , '../../commands')
+        commandsPath = join(__dirname , '../../commands')
     } 
     // 
     if(eventsDir){
-        eventsPath = path.join(__dirname , `../../${eventsDir}`)
+        eventsPath = join(__dirname , `../../${eventsDir}`)
     }
     else{
-        eventsPath = path.join(__dirname , `../../events`)
+        eventsPath = join(__dirname , `../../events`)
     }
 
     if(buttonsDir){
-        buttonsPath = path.join(__dirname , `../../${buttonsDir}`)
+        buttonsPath = join(__dirname , `../../${buttonsDir}`)
     }
     else{
-        buttonsPath = path.join(__dirname , '../../buttons' )
+        buttonsPath = join(__dirname , '../../buttons' )
     }
     
     if(testOnly){
@@ -65,10 +64,10 @@ const sdhandler = async({client , testOnly , commandsDir  , token, eventsDir , p
     client.login(client.token)
     
     const handlers = ['event_handler' , 'command_handler' , 'slash_handler' , 'button_handler' , 'menu_handler']
-    handlers.forEach(handler => {require(`./handlers/${handler}`)(client)})
+    handlers.forEach(handler => require(`./handlers/${handler}`)(client))
 
     const listeners = ['messageCreate' , 'interactionCreate' ]
-    listeners.forEach(listener => {require(`./listeners/${listener}`)(client)})
+    listeners.forEach(listener => require(`./listeners/${listener}`)(client))
 }
 
 module.exports.sdhandler = sdhandler;
