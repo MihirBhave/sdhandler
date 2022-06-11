@@ -42,16 +42,16 @@ module.exports = (client) =>{
             
             console.log("[+] Deployed Guild Commands in : ")
             client.guildID.map(id => {
-                var guild = client.guilds.cache.get(id)
-                if(guild){
-                   guild.commands.set(arrayofCommands)
-                    console.log(guild.name)
-                }
+                   guild.commands.set(arrayofCommands, id).then(() => {
+                        console.log(guild.name);
+                   });
             })
         }
         else{
-            console.log("[+] Deployed Global Commands !")
-             client.application.commands.set(arrayofCommands)
+            console.log("[+] Deploying Global Commands...");
+             client.application.commands.set(arrayofCommands).then(() => {
+                console.log("[+] Deployed Global Commands !");
+            });
         }
 
         console.log(`Loaded ${client.commands.size} legacy command(s) and ${client.slashcommands.size} slash commands !`)
