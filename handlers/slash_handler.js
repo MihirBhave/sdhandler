@@ -1,6 +1,6 @@
 
-const {Client , Permissions} = require('discord.js')
-const Discord = require('discord.js')
+const {Client , Permissions, Constants } = require('discord.js')
+
 /**
  * @async
  * @param {Client} client
@@ -17,11 +17,11 @@ module.exports = (client) =>{
 
         for (var command of client.slashcommands.entries()) {
             const data = command[1]
-            if(!data.type) data.type = Discord.Constants.ApplicationCommandTypes.CHAT_INPUT
+            if(!data.type) data.type = Constants.ApplicationCommandTypes.CHAT_INPUT
             if(data.permissions) data.permissions = [Permissions.FLAGS.SEND_MESSAGES]
 
             //Checking the type of the slash command.
-            if(data.type == Discord.Constants.ApplicationCommandTypes.USER || data.type == Discord.Constants.ApplicationCommandTypes.MESSAGE || data.type == "MESSAGE" || data.type == "USER"){
+            if(data.type == Constants.ApplicationCommandTypes.USER || data.type == Constants.ApplicationCommandTypes.MESSAGE || data.type == "MESSAGE" || data.type == "USER"){
                 delete data.description
                 arrayofCommands.push({
                     name : data.name,

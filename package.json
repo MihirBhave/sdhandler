@@ -20,5 +20,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/MihirBhave/sdhandler.git"
-  }
+  },
+  "homepage": "https://sudo-dragon.gitbook.io/sdhandler-docs/"
 }
