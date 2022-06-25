@@ -1,9 +1,8 @@
 const { existsSync, lstatSync, readdirSync }  = require('fs')
 
 module.exports = (client) =>{
-    if(!existsSync(client.commandsPath)) return ;
+    if(!existsSync(client.commandsPath) || !lstatSync(client.commandsPath).isDirectory()) return ;
 
-    if(!lstatSync(client.commandsPath).isDirectory()) return ;
     const contents = readdirSync(`${client.commandsPath}`)
     const categories = contents.filter(c => lstatSync(`${client.commandsPath}/${c}`).isDirectory())
     if(categories.length > 0){
@@ -18,13 +17,8 @@ module.exports = (client) =>{
                     client.commands.set(command.name , command)
                     console.log(`${command.name} : ✅`)
                     if(command.slash){
-                        if(command.slash == true){
-                            client.slashcommands.set(command.name , command)
-                        }
+                        client.slashcommands.set(command.name , command)
                     }
-                }
-                else{
-                    continue;
                 }
             }
         }
@@ -38,15 +32,11 @@ module.exports = (client) =>{
                     client.commands.set(command.name , command)
                     console.log(`${command.name} : ✅`)
                     if(command.slash){
-                        if(command.slash == true){
-                            client.slashcommands.set(command.name , command)
-                        }
+                        client.slashcommands.set(command.name , command)
                     }
 
                 }
-                else{
-                    continue;
-                }
+
             }
     }
 

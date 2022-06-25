@@ -9,7 +9,7 @@ const {Client , Permissions, Constants } = require('discord.js')
 
 module.exports = (client) =>{
     client.on('ready' , () => {
-        let arrayofCommands = new Array()
+        let arrayofCommands = []
         console.log(`\nLogged in as ${client.user.tag} \n`) 
         console.log('*'.repeat(50))
 
@@ -43,7 +43,7 @@ module.exports = (client) =>{
             console.log("[+] Deployed Guild Commands in : ")
             client.guildID.map(id => {
                    guild.commands.set(arrayofCommands, id).then(() => {
-                        console.log(guild.name);
+                        console.log(`${guild.name} (server)`);
                    });
             })
         }
