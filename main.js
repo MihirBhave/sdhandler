@@ -1,5 +1,6 @@
 const { join } = require('path')
 const {Client} = require('discord.js')
+const mongoose = require('mongoose')
 /**
  * @async
  * @param {Client} client
@@ -10,8 +11,9 @@ const {Client} = require('discord.js')
  * @param {Array} prefix
  * @param {Array} guildID
  * @param {String} buttonsDir
+ * @param {String} mongoUri
  */
-const sdhandler = async({client , testOnly , commandsDir  , token, eventsDir , prefix , guildID , buttonsDir })=> {
+const sdhandler = async({client , testOnly , commandsDir  , token, eventsDir , prefix , guildID , buttonsDir, mongoUri })=> {
     let commandsPath = ''
     let eventsPath = ''
     let buttonsPath = ''
@@ -58,11 +60,18 @@ const sdhandler = async({client , testOnly , commandsDir  , token, eventsDir , p
     client.menusPath = menusPath
     client.buttons = new Map()
     client.menus = new Map()
+    client.mongoUri = mongoUri
 
     //Handlers
 
+    //Login to the token
     client.login(client.token)
-    
+
+    //Login to mongo db
+    if(client.mongoUri){
+        await mongoose.connect(mongoUri, {});
+    }
+
     const handlers = ['event_handler' , 'command_handler' , 'slash_handler' , 'button_handler' , 'menu_handler']
     handlers.forEach(handler => require(`./handlers/${handler}`)(client))
 
