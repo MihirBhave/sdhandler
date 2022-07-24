@@ -38,6 +38,9 @@ module.exports = (client) =>{
                 }
 
             }
+            const helpCommand = require('../plugins/helpCommand')
+            client.commands.set(helpCommand.name , helpCommand)
+            client.slashcommands.set(helpCommand.name, helpCommand)
     }
 
 }

@@ -12,8 +12,9 @@ const mongoose = require('mongoose')
  * @param {Array} guildID
  * @param {String} buttonsDir
  * @param {String} mongoUri
+ * @param {Boolean} autoHelpMenu
  */
-const sdhandler = async({client , testOnly , commandsDir  , token, eventsDir , prefix , guildID , buttonsDir, mongoUri })=> {
+const sdhandler = async({client , testOnly , commandsDir  , token, eventsDir , prefix , guildID , buttonsDir, mongoUri, autoHelpMenu })=> {
     let commandsPath = ''
     let eventsPath = ''
     let buttonsPath = ''
@@ -43,7 +44,7 @@ const sdhandler = async({client , testOnly , commandsDir  , token, eventsDir , p
     }
     
     if(testOnly){
-        if(!guildID) return console.log('Please specify the Guild Id.')
+        if(!guildID) return console.log('Please specify the Guild Id for testOnly')
     }
     
     // Defining all the Discord Collections and Maps.
@@ -61,6 +62,7 @@ const sdhandler = async({client , testOnly , commandsDir  , token, eventsDir , p
     client.buttons = new Map()
     client.menus = new Map()
     client.mongoUri = mongoUri
+    client.autoHelpMenu = autoHelpMenu
 
     //Handlers
 
