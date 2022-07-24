@@ -22,7 +22,12 @@ module.exports = (client) =>{
                 }
             }
         }
-    }
+        if (client.autoHelpMenu !== false) {
+            const helpCommand = require('../plugins/helpCommand')
+            client.commands.set(helpCommand.name , helpCommand)
+            client.slashcommands.set(helpCommand.name, helpCommand) 
+        }
+}
     else{
         const commandFiles = readdirSync(`${client.commandsPath}`).filter(file => file.endsWith('.js'))
             for(const file of commandFiles){
@@ -38,9 +43,6 @@ module.exports = (client) =>{
                 }
 
             }
-            const helpCommand = require('../plugins/helpCommand')
-            client.commands.set(helpCommand.name , helpCommand)
-            client.slashcommands.set(helpCommand.name, helpCommand)
     }
 
 }
