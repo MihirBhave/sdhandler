@@ -1,5 +1,4 @@
-const {Client , Message}  = require('discord.js')
-const Discord = require('discord.js')
+const {Client , Message, Permissions}  = require('discord.js')
 
 /**
  * 
@@ -20,7 +19,7 @@ module.exports = (client ) => {
     if(!command) return ;
 
     try{
-        let perms = [Discord.Permissions.FLAGS.SEND_MESSAGES]
+        let perms = [Permissions.FLAGS.SEND_MESSAGES]
         let count 
         if(!command.permissions)  count =  message.member.permissions.has(perms)
         else{
