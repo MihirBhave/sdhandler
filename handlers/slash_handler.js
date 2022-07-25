@@ -1,6 +1,6 @@
 
-const {Client , Permissions} = require('discord.js')
-const Discord = require('discord.js')
+const {Client , Permissions, Constants } = require('discord.js')
+
 /**
  * @async
  * @param {Client} client
@@ -9,7 +9,7 @@ const Discord = require('discord.js')
 
 module.exports = (client) =>{
     client.on('ready' , () => {
-        let arrayofCommands = new Array()
+        let arrayofCommands = []
         console.log(`\nLogged in as ${client.user.tag} \n`) 
         console.log('*'.repeat(50))
 
@@ -17,11 +17,11 @@ module.exports = (client) =>{
 
         for (var command of client.slashcommands.entries()) {
             const data = command[1]
-            if(!data.type) data.type = Discord.Constants.ApplicationCommandTypes.CHAT_INPUT
+            if(!data.type) data.type = Constants.ApplicationCommandTypes.CHAT_INPUT
             if(data.permissions) data.permissions = [Permissions.FLAGS.SEND_MESSAGES]
 
             //Checking the type of the slash command.
-            if(data.type == Discord.Constants.ApplicationCommandTypes.USER || data.type == Discord.Constants.ApplicationCommandTypes.MESSAGE || data.type == "MESSAGE" || data.type == "USER"){
+            if(data.type == Constants.ApplicationCommandTypes.USER || data.type == Constants.ApplicationCommandTypes.MESSAGE || data.type == "MESSAGE" || data.type == "USER"){
                 delete data.description
                 arrayofCommands.push({
                     name : data.name,
@@ -42,16 +42,16 @@ module.exports = (client) =>{
             
             console.log("[+] Deployed Guild Commands in : ")
             client.guildID.map(id => {
-                var guild = client.guilds.cache.get(id)
-                if(guild){
-                   guild.commands.set(arrayofCommands)
-                    console.log(guild.name)
-                }
+                   guild.commands.set(arrayofCommands, id).then(() => {
+                        console.log(`${guild.name} (server)`);
+                   });
             })
         }
         else{
-            console.log("[+] Deployed Global Commands !")
-             client.application.commands.set(arrayofCommands)
+            console.log("[+] Deploying Global Commands...");
+             client.application.commands.set(arrayofCommands).then(() => {
+                console.log("[+] Deployed Global Commands !");
+            });
         }
 
         console.log(`Loaded ${client.commands.size} legacy command(s) and ${client.slashcommands.size} slash commands !`)

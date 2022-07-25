@@ -1,6 +1,5 @@
-const {Client} = require('discord.js')
-const fs = require('fs')
-const path = require('path')
+const { existsSync, readdirSync } = require('fs')
+const { join } = require('path')
 
 /**
  * 
@@ -12,7 +11,7 @@ module.exports = async(client) => {
     if(fs.existsSync(`${client.buttonsPath}`)){
         const buttonFiles = fs.readdirSync(client.buttonsPath).filter(f => f.endsWith('.js'))
         for(const file of buttonFiles){
-            const button = require(`${path.join(client.buttonsPath , file)}`)
+            const button = require(`${join(client.buttonsPath , file)}`)
             if(button.name){
                 client.buttons.set(button.name , button)
             }

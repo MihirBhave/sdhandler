@@ -1,52 +1,47 @@
-const fs  = require('fs')
+const { existsSync, lstatSync, readdirSync }  = require('fs')
 
 module.exports = (client) =>{
-    if(!fs.existsSync(client.commandsPath)) return ;
+    if(!existsSync(client.commandsPath) || !lstatSync(client.commandsPath).isDirectory()) return ;
 
-    if(!fs.lstatSync(client.commandsPath).isDirectory()) return ;
-    const contents = fs.readdirSync(`${client.commandsPath}`)
-    const categories = contents.filter(c => fs.lstatSync(`${client.commandsPath}/${c}`).isDirectory())
+    const contents = readdirSync(`${client.commandsPath}`)
+    const categories = contents.filter(c => lstatSync(`${client.commandsPath}/${c}`).isDirectory())
     if(categories.length > 0){
         
         for(const category of categories){
-            const commandFiles = fs.readdirSync(`${client.commandsPath}/${category}`).filter(file => file.endsWith('.js'))
+            const commandFiles = readdirSync(`${client.commandsPath}/${category}`).filter(file => file.endsWith('.js'))
             console.log(`\nCommands \n`)
             for(const file of commandFiles){
                 const command = require(`${client.commandsPath}/${category}/${file}`)
                 
                 if(command.name){
-                    client.commands.set(command.name , command)
+                  if (!command.category && client.autoHelpMenu) throw '[sdhandler]: You must have a categories for your command(s) if youre using autoHelpMenu'
+                  client.commands.set(command.name , command)
                     console.log(`${command.name} : ✅`)
                     if(command.slash){
-                        if(command.slash == true){
-                            client.slashcommands.set(command.name , command)
-                        }
+                        client.slashcommands.set(command.name , command)
                     }
-                }
-                else{
-                    continue;
                 }
             }
         }
-    }
+        if (client.autoHelpMenu !== false) {
+            const helpCommand = require('../plugins/helpCommand')
+            client.commands.set(helpCommand.name , helpCommand)
+            client.slashcommands.set(helpCommand.name, helpCommand) 
+        }
+}
     else{
-        const commandFiles = fs.readdirSync(`${client.commandsPath}`).filter(file => file.endsWith('.js'))
+        const commandFiles = readdirSync(`${client.commandsPath}`).filter(file => file.endsWith('.js'))
             for(const file of commandFiles){
                 const command = require(`${client.commandsPath}/${file}`)
-    
                 if(command.name){
                     client.commands.set(command.name , command)
                     console.log(`${command.name} : ✅`)
                     if(command.slash){
-                        if(command.slash == true){
-                            client.slashcommands.set(command.name , command)
-                        }
+                        client.slashcommands.set(command.name , command)
                     }
 
                 }
-                else{
-                    continue;
-                }
+
             }
     }
 
