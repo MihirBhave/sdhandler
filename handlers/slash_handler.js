@@ -18,7 +18,7 @@ module.exports = (client) =>{
         for (var command of client.slashcommands.entries()) {
             const data = command[1]
             if(!data.type) data.type = Discord.Constants.ApplicationCommandTypes.CHAT_INPUT
-            if(data.permissions) data.permissions = [Permissions.FLAGS.SEND_MESSAGES]
+            if(!data.permissions) data.permissions = [Permissions.FLAGS.SEND_MESSAGES]
 
             //Checking the type of the slash command.
             if(data.type == Discord.Constants.ApplicationCommandTypes.USER || data.type == Discord.Constants.ApplicationCommandTypes.MESSAGE || data.type == "MESSAGE" || data.type == "USER"){
@@ -55,6 +55,11 @@ module.exports = (client) =>{
         }
 
         console.log(`Loaded ${client.commands.size} legacy command(s) and ${client.slashcommands.size} slash commands !`)
+
+        //Firing up the init 
+        client.commands.map(command => {
+            if(command.init) command.init(client);
+        })
               
     })
 }

@@ -1,5 +1,6 @@
 const {Client , Message}  = require('discord.js')
 const Discord = require('discord.js')
+const { roleChecker } = require('../extras/roleChecking')
 
 /**
  * 
@@ -7,8 +8,8 @@ const Discord = require('discord.js')
  * @param {Discord} Discord 
  * @param {Message} message
  */
-module.exports = (client ) => {
-    client.on('messageCreate' , (message) => {
+module.exports = async (client ) => {
+    client.on('messageCreate' , async (message) => {
     const prefixes = client.prefix
     const prefix = prefixes.filter(p => message.content.startsWith(p))
  
@@ -30,7 +31,11 @@ module.exports = (client ) => {
             command.execute({client : client , message : message , args : args , prefix : prefix , channel : message.channel});
         }
         else{
-            message.reply({content : "You don't have the appropriate permissions needed."})
+            if(command.requiredRoles){
+           const response = await roleChecker({member : message.member , command : command})
+           if(response) return command.execute({client : client , message : message , args : args , prefix : prefix , channel : message.channel});
+            }
+          return message.reply({content : "You don't have the appropriate permissions needed."})
         }
     } 
     catch (err){
