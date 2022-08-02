@@ -56,9 +56,7 @@ const sdhandler = async({client , testOnly , commandsDir  , token, eventsDir , p
     client.prefix = prefix
     client.guildID = guildID
     client.buttonsPath = buttonsPath
-    client.menusPath = menusPath
     client.buttons = new Discord.Collection()
-    client.menus = new Discord.Collection()
 
     //Handlers
 
