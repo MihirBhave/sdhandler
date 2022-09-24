@@ -7,7 +7,7 @@ const { roleChecker } = require('../extras/roleChecking')
  * @param {Interaction} interaction
  */
 
-module.exports =async(client) => {
+module.exports = async(client) => {
     client.on('interactionCreate' , async(interaction) => {
         
         if(interaction.isCommand() || interaction.isApplicationCommand()){
