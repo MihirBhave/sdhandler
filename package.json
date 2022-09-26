@@ -1,6 +1,6 @@
 {
   "name": "sdhandler",
-  "version": "2.0.1",
+  "version": "1.2.7",
   "description": "This is a package aimed at making development of Discord Bots Easier !",
   "main": "main.js",
   "scripts": {
