@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const { bold, orange } = require("colorette")
+const { bold, blue } = require("colorette")
 
 
 /**
@@ -8,7 +8,7 @@ const { bold, orange } = require("colorette")
  */
 
 module.exports = async (client) => {
-    console.log(bold(orange('EVENTS \n')))
+    console.log(bold(blue('EVENTS \n')))
     if(!fs.existsSync(client.eventsPath)) return ;
     const load_dir = async(dirs) =>{
         const event_files = fs.readdirSync(path.join(client.eventsPath , `${dirs}`)).filter(file => file.endsWith('.js'))
