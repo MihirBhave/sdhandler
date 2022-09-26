@@ -20,7 +20,7 @@
     "glob": "^8.0.3",
     "figlet": "^1.5.2",
     "colorette": "^2.0.19",
-    "ascii-table": "0.0.9"
+    "ascii-table": "^0.0.9"
   },
   "repository": {
     "type": "git",
