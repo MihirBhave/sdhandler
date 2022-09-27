@@ -1,65 +1,61 @@
+const { Constants , Client , Permissions} = require("discord.js")
+const { bold , createColors } = require("colorette")
+const { orange , red , cyan } = createColors({ useColor : true })
+const Discord = require("discord.js")
 
-const {Client , Permissions} = require('discord.js')
-const Discord = require('discord.js')
 /**
- * @async
- * @param {Client} client
- * @param {Discord} Discord
- */
+* @async
+* @param {Client} client
+* @param {Discord} discord 
+*/
 
-module.exports = (client) =>{
-    client.on('ready' , () => {
-        let arrayofCommands = new Array()
-        console.log(`\nLogged in as ${client.user.tag} \n`) 
-        console.log('*'.repeat(50))
-
-        //Adding the Slash Commands to the Array.
-
-        for (var command of client.slashcommands.entries()) {
-            const data = command[1]
-            if(!data.type) data.type = Discord.Constants.ApplicationCommandTypes.CHAT_INPUT
+module.exports = (client) => {
+    client.on("ready", () => {
+        let arraysOfCommands = new Array()
+        console.log(bold(orange(`\n Login in as ${client.user.tag} \n`)))
+        console.log("*".repeat(50))
+        
+        for (const commands of client.slashcommands.entries()) {
+            const data = commands[1]
+            if(!data.type) data.type = Constants.ApplicationCommandTypes.CHAT_INPUT
             if(!data.permissions) data.permissions = [Permissions.FLAGS.SEND_MESSAGES]
-
-            //Checking the type of the slash command.
-            if(data.type == Discord.Constants.ApplicationCommandTypes.USER || data.type == Discord.Constants.ApplicationCommandTypes.MESSAGE || data.type == "MESSAGE" || data.type == "USER"){
+            
+            
+            if(data.type === Constants.ApplicationCommandTypes.USER || data.type === Constants.ApplicationCommandTypes.MESSAGE || data.type === "MESSAGE" || data.type === "USER") {
                 delete data.description
-                arrayofCommands.push({
+                arraysOfCommands.push({
                     name : data.name,
                     options : data.options,
                     type : data.type
                 })
-            }
-            else{
-                arrayofCommands.push({
+            } else {
+                arraysOfCommands.push({
                     name : data.name,
                     description : data.description,
                     type : data.type,
-                    options : data.options
+                    options : data.options 
                 })
             }
         }
-        if(client.testOnly === true){
-            
-            console.log("[+] Deployed Guild Commands in : ")
+        
+        if(client.testOnly === true) {
+            console.log(red("(/) Deployed Guild Commands in : "))
             client.guildID.map(id => {
-                var guild = client.guilds.cache.get(id)
-                if(guild){
-                   guild.commands.set(arrayofCommands)
+                const guild = client.guilds.cache.get(id)
+                if(guild) {
+                    guild.commands.set(arraysOfCommands)
                     console.log(guild.name)
                 }
             })
+        } else {
+            console.log(orange("(/) Deployed Guilds Commands !"))
+            client.application.commands.set(arraysOfCommands)
         }
-        else{
-            console.log("[+] Deployed Global Commands !")
-             client.application.commands.set(arrayofCommands)
-        }
-
-        console.log(`Loaded ${client.commands.size} legacy command(s) and ${client.slashcommands.size} slash commands !`)
-
-        //Firing up the init 
+        
+        console.log(cyan(`Loaded (!) ${client.commands.size} legacy commands and (/) ${client.slashcommands.size} slash command`))
+        
         client.commands.map(command => {
-            if(command.init) command.init(client);
+            if(command.init) command.init(client)
         })
-              
     })
 }
